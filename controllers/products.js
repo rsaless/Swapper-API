@@ -77,6 +77,26 @@ module.exports = function (app) {
             }
         })
     });
+    app.get('/user/:user_id/produtos/:id', function(req, res){
+        var user_id = req.params.user_id;
+        var id = req.params.id;
+        console.log('consultando o produto de ID = '+ id + ' do usuário de USER_ID = ' + user_id);
+
+        var connection = app.persistencia.connectionFactory();
+        var dao = new app.persistencia.DAO(connection);
+
+        dao.busca_produto_usuario(user_id, id, function (erro, resultado) {
+            if(erro){
+                console.log('erro ao consultar produtos no banco: ' + erro);
+                res.status(500).send(erro);
+                return;
+            } else {
+                console.log('produto encontrado: ' + JSON.stringify(resultado));
+                res.status(200).json(resultado);
+                return;
+            }
+        })
+    });
 
 
     app.put('/user/:id/atualiza', function (req, res) {

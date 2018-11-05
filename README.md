@@ -33,7 +33,7 @@ URL base: http://localhost:3000
 | PUT       | `/user/(ID)/atualiza`                       |:heavy_check_mark:  | Atualizar dados de um usuário            |
 | DELETE    | `/user/(ID)/remove`                         |:heavy_check_mark:  | Remover um usuário da aplicação          |
 | GET       | `/user/(ID)/produtos`                       |:heavy_check_mark:  | Retornar os produtos de um usuário       |
-| GET       | `/user/(ID)/produtos/(produto)`             |:x:                 | Retornar os dados de um produto          |
+| GET       | `/user/(ID)/produtos/(produto)`             |:heavy_check_mark:  | Retornar os dados de um produto          |
 | PUT       | `/user/(ID)/produtos/(produto)/edita`       |:x:                 | Editar os dados de um produto            |
 | DELETE    | `/user/(ID)/produtos/(produto)/remove`      |:x:                 | Remover um produto da aplicação          |
 | POST      | `/user/(ID)/produtos/cadastra`              |:heavy_check_mark:  | Cadastrar um novo produto                |

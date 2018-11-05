@@ -117,7 +117,27 @@ module.exports = function (app) {
                     ]
                 };
 
-                res.status(201).json(response);
+                res.status(200).json(response);
+            }
+        });
+    });
+
+    app.get('/user/:id', function (req, res) {
+        var id = req.params.id;
+        console.log('consultando dados do usuario: ID = ' + id);
+
+        var connection = app.persistencia.connectionFactory();
+        var dao = new app.persistencia.DAO(connection);
+
+        dao.busca_usuario(id, function (erro, resultado) {
+            if(erro){
+                console.log('erro ao consultar usuário no banco: ' + erro);
+                res.status(500).send(erro);
+                return;
+            } else {
+                console.log('Usuário encontrado: ' + JSON.stringify(resultado));
+                res.status(200).json(resultado);
+                return;
             }
         });
     });

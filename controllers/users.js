@@ -141,4 +141,26 @@ module.exports = function (app) {
             }
         });
     });
+
+    app.delete('/user/:id/remove', function (req, res) {
+        var usuario = {};
+        usuario.id = req.params.id;
+        usuario.status = "INATIVO";
+        console.log('Removendo o usuario: ID = ' + usuario.id);
+
+        var connection = app.persistencia.connectionFactory();
+        var dao = new app.persistencia.DAO(connection);
+
+        dao.remove_usuario(usuario, function (erro, resultado) {
+            if(erro){
+                console.log('erro ao consultar usuário no banco: ' + erro);
+                res.status(500).send(erro);
+                return;
+            } else {
+                console.log('Usuário removido com sucesso!');
+                res.status(200).send('Usuário removido com sucesso!');
+                return;
+            }
+        });
+    })
 };

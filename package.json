@@ -1,0 +1,34 @@
+{
+  "name": "swapper-api",
+  "version": "1.0.0",
+  "description": "API Node para o backend da aplicação Swapper",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rsaless/Swapper-API.git"
+  },
+  "keywords": [
+    "Node",
+    "API",
+    "MEAN",
+    "Swapper"
+  ],
+  "author": "Rafael Sales Pavarina",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rsaless/Swapper-API/issues"
+  },
+  "homepage": "https://github.com/rsaless/Swapper-API#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "consign": "^0.1.6",
+    "express": "^4.16.4",
+    "express-validator": "^5.3.0",
+    "mysql": "^2.16.0",
+    "restify": "^7.2.2",
+    "soap": "^0.25.0"
+  }
+}

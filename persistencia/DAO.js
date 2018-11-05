@@ -11,7 +11,8 @@ DAO.prototype.cadastra_usuario = function(usuario, callback){
 };
 
 DAO.prototype.atualiza_usuario = function(usuario, callback){
-    this._connection.query('UPDATE users SET nome = ? where id = ?', [usuario.nome, usuario.id], callback);
+    this._connection.query('UPDATE users SET nome = ?, sobrenome = ?, email = ?, senha = ?, celular = ? where id = ?',
+        [usuario.nome, usuario.sobrenome, usuario.email, usuario.senha, usuario.celular, usuario.id], callback);
 };
 
 DAO.prototype.busca_usuario = function(id, callback){

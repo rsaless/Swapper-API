@@ -29,7 +29,7 @@ URL base: http://localhost:3000
 | POST      | `/logout`                                 |:x:                 | Efetuar logout na aplicação              |
 | GET       | `/user/(ID)/`                             |:x:                 | Listar dados de um usuário               |
 | POST      | `/user/cadastro`                          |:heavy_check_mark:  | Cadastrar um novo usuário                |
-| PUT       | `/user/(ID)/atualiza`                     |:x:                 | Atualizar dados de um usuário            |
+| PUT       | `/user/(ID)/atualiza`                     |:heavy_check_mark:  | Atualizar dados de um usuário            |
 | DELETE    | `/user/(ID)/remove`                       |:x:                 | Remover um usuário da aplicação          |
 | GET       | `/user/(ID)/produtos`                     |:x:                 | Retornar os produtos de um usuário       |
 | GET       | `/user/(ID)/produtos/produto`             |:x:                 | Retornar os dados de um produto          |

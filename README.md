@@ -15,6 +15,7 @@ Observação: Na primeira versão da API, o banco de dados utilizado será o MyS
 > create database swapper;  
 > use swapper;  
 > CREATE TABLE users(id int(11) NOT NULL AUTO_INCREMENT, nome varchar(20) NOT NULL, sobrenome varchar(100) NOT NULL, email varchar(50) NOT NULL, senha varchar(20) NOT NULL, celular varchar(11) NOT NULL, status varchar(20) NOT NULL, PRIMARY KEY (id));
+> CREATE TABLE produtos( id int(11) NOT NULL AUTO_INCREMENT, nome varchar(80) NOT NULL, quantidade int(2) NOT NULL DEFAULT '1', min_price decimal(4,2) NOT NULL DEFAULT '1.00', max_price decimal(8,2) NOT NULL, descricao varchar(256) NOT NULL DEFAULT 'Não há descrição', status varchar(20) , user_id int(11) NOT NULL, PRIMARY KEY (id), FOREIGN KEY (user_id) REFERENCES users(id));
 
 
 ## Documentação
@@ -35,7 +36,7 @@ URL base: http://localhost:3000
 | GET       | `/user/(ID)/produtos/(produto)`             |:x:                 | Retornar os dados de um produto          |
 | PUT       | `/user/(ID)/produtos/(produto)/edita`       |:x:                 | Editar os dados de um produto            |
 | DELETE    | `/user/(ID)/produtos/(produto)/remove`      |:x:                 | Remover um produto da aplicação          |
-| POST      | `/user/(ID)/produtos/cadastra`              |:x:                 | Cadastrar um novo produto                |
+| POST      | `/user/(ID)/produtos/cadastra`              |:heavy_check_mark:  | Cadastrar um novo produto                |
 | GET       | `/user/(ID)/propostas/feitas`               |:x:                 | Listar propostas feitas pelo usuário     |
 | GET       | `/user/(ID)/propostas/recebidas`            |:x:                 | Listar propostas recebidas pelo usuário  |
 | GET       | `/user/(ID)/propostas/(proposta)`           |:x:                 | Retornar os dados de uma proposta        |

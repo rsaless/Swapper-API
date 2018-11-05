@@ -4,12 +4,10 @@ module.exports = function (app) {
         return usuario.nome + " " + usuario.sobrenome;
     };
 
-    app.post('/user/cadastro', function (req, res) {
-        req.assert("usuario.nome", "campo \"Nome\" é obrigatorio").notEmpty();
-        req.assert("usuario.sobrenome", "campo \"Sobrenome\" é obrigatorio").notEmpty();
-        req.assert("usuario.email", "campo \"Email\" é obrigatorio").notEmpty();
-        req.assert("usuario.senha", "campo \"Senha\" é obrigatorio").notEmpty();
-        req.assert("usuario.celular", "campo \"Celular\" é obrigatorio").notEmpty();
+    app.post('/user/:id/produtos/cadastra', function (req, res) {
+        req.assert("produto.nome", "campo \"Nome\" é obrigatorio").notEmpty();
+        req.assert("produto.min_price", "campo \"Preço mínimo\" é obrigatorio").notEmpty();
+        req.assert("produto.max_price", "campo \"Preço máximo\" é obrigatorio").notEmpty();
 
         var erros = req.validationErrors();
         if (erros){
@@ -18,44 +16,41 @@ module.exports = function (app) {
             return;
         }
 
-        var usuario = req.body["usuario"];
-        console.log("processando o cadastro de um novo usuário");
-        usuario.status = 'ATIVO';
+        var id = req.params.id;
+        var produto = req.body["produto"];
+        console.log("processando o cadastro de um novo produto");
+        produto.status = 'DISPONIVEL';
+        produto.user_id = id;
 
         var connection = app.persistencia.connectionFactory();
         var dao = new app.persistencia.DAO(connection);
 
-        dao.cadastra_usuario(usuario, function (erro, resultado) {
+        dao.cadastra_produto(produto, function (erro, resultado) {
             if (erro){
-                console.log('Erro ao inserir o novo usuário no banco: ' + erro);
+                console.log('Erro ao inserir o novo produto no banco: ' + erro);
                 res.status(500).send(erro);
             } else {
-                usuario.id = resultado.insertId;
-                console.log('Usuário ' + nome_completo(usuario) + ' cadastrado com sucesso!');
+                produto.id = resultado.insertId;
+                console.log('Produto ' + produto.nome + ' cadastrado com sucesso!');
 
                 var response = {
-                    dados_do_usuario: usuario,
+                    dados_do_produto: produto,
                     links: [
                         {
-                            href:"http://localhost:3000/user/"+ usuario.id +"/atualiza/",
-                            rel:"atualizar_usuario",
+                            href:"http://localhost:3000/user/"+ produto.user_id +"/produtos/"+ produto.id + "/edita",
+                            rel:"atualizar_produto",
                             method:"PUT"
                         },
                         {
-                            href:"http://localhost:3000/user/"+ usuario.id +"/remove/",
-                            rel:"remover_usuario",
+                            href:"http://localhost:3000/user/"+ produto.user_id +"/produtos/"+ produto.id + "/remove",
+                            rel:"remover_produto",
                             method:"DELETE"
                         },
                         {
-                            href:"http://localhost:3000/user/"+ usuario.id +"/produtos/",
-                            rel:"listar_produtos_do_usuario",
+                            href:"http://localhost:3000/user/"+ produto.user_id +"/produtos/"+ produto.id,
+                            rel:"listar_dados_do_produto",
                             method:"GET"
-                        },
-                        {
-                            href:"http://localhost:3000/user/"+ usuario.id,
-                            rel:"ver_perfil_do_usuario",
-                            method:"GET"
-                        },
+                        }
                     ]
                 };
 
@@ -63,6 +58,9 @@ module.exports = function (app) {
             }
         });
     });
+
+
+
     app.put('/user/:id/atualiza', function (req, res) {
         req.assert("usuario.nome", "campo \"Nome\" é obrigatorio").notEmpty();
         req.assert("usuario.sobrenome", "campo \"Sobrenome\" é obrigatorio").notEmpty();

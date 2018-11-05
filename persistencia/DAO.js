@@ -19,3 +19,11 @@ DAO.prototype.remove_usuario = function(usuario, callback){
 DAO.prototype.busca_usuario = function(id, callback){
     this._connection.query('SELECT * FROM users WHERE id = ?', [id], callback);
 };
+
+DAO.prototype.lista_produtos_usuario = function(user_id, callback){
+    this._connection.query('SELECT * FROM produtos WHERE user_id = ?', [user_id], callback);
+};
+
+DAO.prototype.cadastra_produto = function (produto, callback) {
+    this._connection.query('INSERT INTO produtos SET ?', produto, callback)
+};

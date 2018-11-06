@@ -34,3 +34,13 @@ DAO.prototype.edita_produto = function (produto, user_id, id, callback) {
 DAO.prototype.remove_produto = function (produto, callback) {
     this._connection.query('UPDATE produtos SET status = ? where user_id = ? and id = ?',[produto.status, produto.user_id, produto.id], callback);
 };
+
+DAO.prototype.propostas_recebidas = function (id, callback) {
+    this._connection.query('SELECT * FROM propostas where dono_desejado = ?', [id], callback);
+};
+DAO.prototype.propostas_realizadas = function (id, callback) {
+    this._connection.query('SELECT * FROM propostas where dono_ofertado = ?', [id], callback);
+};
+DAO.prototype.realizar_proposta = function (proposta, callback) {
+    this._connection.query('INSERT INTO propostas SET ?', proposta, callback);
+}

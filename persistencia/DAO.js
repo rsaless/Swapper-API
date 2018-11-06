@@ -30,4 +30,7 @@ DAO.prototype.cadastra_produto = function (produto, callback) {
 };
 DAO.prototype.edita_produto = function (produto, user_id, id, callback) {
     this._connection.query('UPDATE produtos SET ? where user_id = ? and id = ?', [produto, produto.user_id, produto.id], callback);
-}
+};
+DAO.prototype.remove_produto = function (produto, callback) {
+    this._connection.query('UPDATE produtos SET status = ? where user_id = ? and id = ?',[produto.status, produto.user_id, produto.id], callback);
+};

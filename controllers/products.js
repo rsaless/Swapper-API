@@ -136,4 +136,26 @@ module.exports = function (app) {
             }
         });
     });
+    app.delete('/user/:user_id/produtos/:id/remove', function (req, res) {
+        var produto = {};
+        produto.id = req.params.id;
+        produto.user_id = req.params.user_id;
+        produto.status = "REMOVIDO";
+        console.log('Removendo o produto: ID = ' + produto.id);
+
+        var connection = app.persistencia.connectionFactory();
+        var dao = new app.persistencia.DAO(connection);
+
+        dao.remove_produto(produto, function (erro, resultado) {
+            if(erro){
+                console.log('erro ao consultar produto no banco: ' + erro);
+                res.status(500).send(erro);
+                return;
+            } else {
+                console.log('Produto removido com sucesso!');
+                res.status(200).send('Produto removido com sucesso!');
+                return;
+            }
+        });
+    });
 };

@@ -48,5 +48,10 @@ DAO.prototype.listar_propostas_produto = function (user_id, prod_id, callback) {
     this._connection.query('SELECT * FROM propostas where dono_desejado = ? and produto_desejado = ?', [user_id, prod_id], callback);
 };
 DAO.prototype.buscar_proposta_produto = function (user_id, prod_id, prop_id, callback) {
-    this._connection.query('SELECT * FROM propostas where dono_desejado = ? and produto_desejado = ? and id = ?', [user_id, prod_id, prop_id], callback);
+    this._connection.query('SELECT * FROM propostas where dono_desejado = ? and produto_desejado = ? and id = ?',
+        [user_id, prod_id, prop_id], callback);
+};
+DAO.prototype.aceitar_recusar_proposta = function (proposta, callback){
+    this._connection.query('UPDATE propostas SET status = ? where dono_desejado = ? and produto_desejado = ? and id = ?',
+        [proposta. status, proposta.user_id, proposta.prod_id, proposta.prop_id], callback);
 };

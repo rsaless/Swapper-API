@@ -25,7 +25,7 @@ URLs, Rotas, Parâmetros e afins...
 URL base: http://localhost:3000
 
 | Método    | Rota                                                          | Status             | Descrição                                                |
-| :-------- | :---                                                          | :---:              | :---                                                     |
+|:----------|:--------------------------------------------------------------|:------------------:|:---------------------------------------------------------|
 | POST      | `/login`                                                      |:x:                 | Efetuar login na aplicação                               |
 | POST      | `/logout`                                                     |:x:                 | Efetuar logout na aplicação                              |
 | GET       | `/user/(ID)/`                                                 |:heavy_check_mark:  | Listar dados de um usuário                               |
@@ -41,8 +41,8 @@ URL base: http://localhost:3000
 | GET       | `/user/(ID)/propostas/recebidas`                              |:heavy_check_mark:  | Listar propostas recebidas pelo usuário                  |
 | GET       | `/user/(ID)/produtos/(produto)/propostas`                     |:heavy_check_mark:  | Retornar os dados de uma proposta                        |
 | GET       | `/user/(ID)/produtos/(produto)/propostas/(proposta)`          |:heavy_check_mark:  | Retornar os dados de uma proposta                        |
-| POST      | `/user/(ID)/produtos/(produto)/propostas/(proposta)/aceitar`  |:x:                 | Aceitar uma proposta                                     |
-| POST      | `/user/(ID)/produtos/(produto)/propostas/(proposta)/recusar`  |:x:                 | Recusar uma proposta                                     |
+| POST      | `/user/(ID)/produtos/(produto)/propostas/(proposta)/aceitar`  |:heavy_check_mark:  | Aceitar uma proposta                                     |
+| POST      | `/user/(ID)/produtos/(produto)/propostas/(proposta)/recusar`  |:heavy_check_mark:  | Recusar uma proposta                                     |
 | POST      | `/user/(ID)/produtos/(produto)/propostas/nova/(ID2)/(oferta)` |:heavy_check_mark:  | 'ID2' oferece 'oferta' para 'ID' em troca de 'produto'   |    
 
 

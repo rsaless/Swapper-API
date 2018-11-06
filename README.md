@@ -26,8 +26,8 @@ URL base: http://localhost:3000
 
 | Método    | Rota                                                          | Status             | Descrição                                                |
 |:----------|:--------------------------------------------------------------|:------------------:|:---------------------------------------------------------|
-| POST      | `/login`                                                      |:x:                 | Efetuar login na aplicação                               |
-| POST      | `/logout`                                                     |:x:                 | Efetuar logout na aplicação                              |
+| POST      | `/login`                                                      |:wrench:            | Efetuar login na aplicação                               |
+| POST      | `/logout`                                                     |:wrench:            | Efetuar logout na aplicação                              |
 | GET       | `/user/(ID)/`                                                 |:heavy_check_mark:  | Listar dados de um usuário                               |
 | POST      | `/user/cadastro`                                              |:heavy_check_mark:  | Cadastrar um novo usuário                                |
 | PUT       | `/user/(ID)/atualiza`                                         |:heavy_check_mark:  | Atualizar dados de um usuário                            |

@@ -12,9 +12,8 @@ module.exports = function(){
     app.use(expressValidator());
 
     consign()
-        .include('controllers')
+        .include('routes')
         .then('persistencia')
-        .then('servicos')
         .into(app);
 
     return app;

@@ -55,3 +55,7 @@ DAO.prototype.aceitar_recusar_proposta = function (proposta, callback){
     this._connection.query('UPDATE propostas SET status = ? where dono_desejado = ? and produto_desejado = ? and id = ?',
         [proposta. status, proposta.user_id, proposta.prod_id, proposta.prop_id], callback);
 };
+
+DAO.prototype.fazer_login = function (user, callback) {
+    this._connection.query('SELECT * FROM users where email = ? and senha = ?', [user.username, user.password], callback);
+}

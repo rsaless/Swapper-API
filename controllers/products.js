@@ -1,9 +1,5 @@
 module.exports = function (app) {
 
-    function nome_completo(usuario){
-        return usuario.nome + " " + usuario.sobrenome;
-    };
-
     app.post('/user/:id/produtos/cadastra', function (req, res) {
         req.assert("produto.nome", "campo \"Nome\" é obrigatorio").notEmpty();
         req.assert("produto.min_price", "campo \"Preço mínimo\" é obrigatorio").notEmpty();
@@ -97,58 +93,42 @@ module.exports = function (app) {
             }
         })
     });
+    app.put('/user/:user_id/produtos/:id/edita', function (req, res) {
 
+        var produto = req.body["produto"];
+        produto.id = req.params.id;
+        produto.user_id = req.params.user_id;
 
-    app.put('/user/:id/atualiza', function (req, res) {
-        req.assert("usuario.nome", "campo \"Nome\" é obrigatorio").notEmpty();
-        req.assert("usuario.sobrenome", "campo \"Sobrenome\" é obrigatorio").notEmpty();
-        req.assert("usuario.email", "campo \"Email\" é obrigatorio").notEmpty();
-        req.assert("usuario.senha", "campo \"Senha\" é obrigatorio").notEmpty();
-        req.assert("usuario.celular", "campo \"Celular\" é obrigatorio").notEmpty();
-
-        var erros = req.validationErrors();
-        if (erros){
-            console.log('Erros de validação encontrados');
-            res.status(400).send(erros);
-            return;
-        }
-
-        var usuario = req.body["usuario"];
-        console.log("processando alterações no usuário " + nome_completo(usuario));
+        console.log("processando alterações no produto");
 
         var connection = app.persistencia.connectionFactory();
         var dao = new app.persistencia.DAO(connection);
 
-        dao.atualiza_usuario(usuario, function (erro, resultado) {
+        dao.edita_produto(produto, produto.user_id, produto.id, function (erro, resultado) {
             if (erro){
-                console.log('Erro ao alterar o usuário no banco: ' + erro);
+                console.log('Erro ao alterar o produto no banco: ' + erro);
                 res.status(500).send(erro);
             } else {
-                console.log('Usuário ' + usuario.nome + ' ' + usuario.sobrenome + ' alterado com sucesso!');
+                console.log('Produto alterado com sucesso!');
 
                 var response = {
-                    dados_do_usuario: usuario,
+                    dados_do_produto: produto,
                     links: [
                         {
-                            href:"http://localhost:3000/user/"+ usuario.id +"/atualiza/",
-                            rel:"atualizar_usuario",
+                            href:"http://localhost:3000/user/"+ produto.user_id +"/produtos/"+ produto.id + "/edita",
+                            rel:"atualizar_produto",
                             method:"PUT"
                         },
                         {
-                            href:"http://localhost:3000/user/"+ usuario.id +"/remove/",
-                            rel:"remover_usuario",
+                            href:"http://localhost:3000/user/"+ produto.user_id +"/produtos/"+ produto.id + "/remove",
+                            rel:"remover_produto",
                             method:"DELETE"
                         },
                         {
-                            href:"http://localhost:3000/user/"+ usuario.id +"/produtos/",
-                            rel:"listar_produtos_do_usuario",
+                            href:"http://localhost:3000/user/"+ produto.user_id +"/produtos/"+ produto.id,
+                            rel:"listar_dados_do_produto",
                             method:"GET"
-                        },
-                        {
-                            href:"http://localhost:3000/user/"+ usuario.id,
-                            rel:"ver_perfil_do_usuario",
-                            method:"GET"
-                        },
+                        }
                     ]
                 };
 
@@ -156,44 +136,4 @@ module.exports = function (app) {
             }
         });
     });
-    app.get('/user/:id', function (req, res) {
-        var id = req.params.id;
-        console.log('consultando dados do usuario: ID = ' + id);
-
-        var connection = app.persistencia.connectionFactory();
-        var dao = new app.persistencia.DAO(connection);
-
-        dao.busca_usuario(id, function (erro, resultado) {
-            if(erro){
-                console.log('erro ao consultar usuário no banco: ' + erro);
-                res.status(500).send(erro);
-                return;
-            } else {
-                console.log('Usuário encontrado: ' + JSON.stringify(resultado));
-                res.status(200).json(resultado);
-                return;
-            }
-        });
-    });
-    app.delete('/user/:id/remove', function (req, res) {
-        var usuario = {};
-        usuario.id = req.params.id;
-        usuario.status = "INATIVO";
-        console.log('Removendo o usuario: ID = ' + usuario.id);
-
-        var connection = app.persistencia.connectionFactory();
-        var dao = new app.persistencia.DAO(connection);
-
-        dao.remove_usuario(usuario, function (erro, resultado) {
-            if(erro){
-                console.log('erro ao consultar usuário no banco: ' + erro);
-                res.status(500).send(erro);
-                return;
-            } else {
-                console.log('Usuário removido com sucesso!');
-                res.status(200).send('Usuário removido com sucesso!');
-                return;
-            }
-        });
-    })
 };

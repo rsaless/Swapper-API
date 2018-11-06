@@ -64,26 +64,15 @@ module.exports = function (app) {
         });
     });
     app.put('/user/:id/atualiza', function (req, res) {
-        req.assert("usuario.nome", "campo \"Nome\" é obrigatorio").notEmpty();
-        req.assert("usuario.sobrenome", "campo \"Sobrenome\" é obrigatorio").notEmpty();
-        req.assert("usuario.email", "campo \"Email\" é obrigatorio").notEmpty();
-        req.assert("usuario.senha", "campo \"Senha\" é obrigatorio").notEmpty();
-        req.assert("usuario.celular", "campo \"Celular\" é obrigatorio").notEmpty();
-
-        var erros = req.validationErrors();
-        if (erros){
-            console.log('Erros de validação encontrados');
-            res.status(400).send(erros);
-            return;
-        }
 
         var usuario = req.body["usuario"];
+        usuario.id = req.params.id;
         console.log("processando alterações no usuário " + nome_completo(usuario));
 
         var connection = app.persistencia.connectionFactory();
         var dao = new app.persistencia.DAO(connection);
 
-        dao.atualiza_usuario(usuario, function (erro, resultado) {
+        dao.atualiza_usuario(usuario, usuario.id, function (erro, resultado) {
             if (erro){
                 console.log('Erro ao alterar o usuário no banco: ' + erro);
                 res.status(500).send(erro);

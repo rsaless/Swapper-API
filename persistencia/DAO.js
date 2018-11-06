@@ -43,4 +43,10 @@ DAO.prototype.propostas_realizadas = function (id, callback) {
 };
 DAO.prototype.realizar_proposta = function (proposta, callback) {
     this._connection.query('INSERT INTO propostas SET ?', proposta, callback);
-}
+};
+DAO.prototype.listar_propostas_produto = function (user_id, prod_id, callback) {
+    this._connection.query('SELECT * FROM propostas where dono_desejado = ? and produto_desejado = ?', [user_id, prod_id], callback);
+};
+DAO.prototype.buscar_proposta_produto = function (user_id, prod_id, prop_id, callback) {
+    this._connection.query('SELECT * FROM propostas where dono_desejado = ? and produto_desejado = ? and id = ?', [user_id, prod_id, prop_id], callback);
+};

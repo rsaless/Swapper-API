@@ -1,4 +1,6 @@
 const jwt = require('jsonwebtoken');
+const { promisify } = require('util');
+const verify = promisify(jwt.verify);
 module.exports = function(app){
 
     app.post('/user/login', function(req, res) {
@@ -49,5 +51,24 @@ module.exports = function(app){
             }
         });
     });
+
+    app.verifica = async function (req, res, next) {
+        const token = req.headers['x-access-token'];
+        if (token){
+            try {
+                const decoded = await verify(token, 'secret');
+                console.log("Token válido recebido: " + token);
+                req.user = decoded;
+                next();
+            } catch (err) {
+                console.log(err);
+                console.log("Token inválido: " + token);
+                return res.status(401).send(err);
+            }
+        } else {
+            console.log("Token inexistente!");
+            return res.status(401).send("Token inexistente!");
+        }
+    }
 };
 

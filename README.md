@@ -15,7 +15,7 @@ Observação: Na primeira versão da API, o banco de dados utilizado será o MyS
 > create database swapper;  
 > use swapper;  
 
-> CREATE TABLE users(id int(11) NOT NULL AUTO_INCREMENT, nome varchar(20) NOT NULL, sobrenome varchar(100) NOT NULL, email varchar(50) NOT NULL UNIQUE, senha varchar(20) NOT NULL, celular varchar(11) NOT NULL, status varchar(20) NOT NULL, PRIMARY KEY (id));   
+> CREATE TABLE users(id int(11) NOT NULL AUTO_INCREMENT, nome varchar(20) NOT NULL, sobrenome varchar(100) NOT NULL, email varchar(50) NOT NULL UNIQUE, usuario varchar(20) NOT NULL UNIQUE, senha varchar(20) NOT NULL, celular varchar(11) NOT NULL, status varchar(20) NOT NULL, PRIMARY KEY (id));   
 
 > CREATE TABLE produtos( id int(11) NOT NULL AUTO_INCREMENT, nome varchar(80) NOT NULL, quantidade int(2) NOT NULL DEFAULT '1', min_price decimal(4,2) NOT NULL DEFAULT '1.00', max_price decimal(8,2) NOT NULL, descricao varchar(256) NOT NULL DEFAULT 'Não há descrição', status varchar(20) , user_id int(11) NOT NULL, PRIMARY KEY (id), FOREIGN KEY (user_id) REFERENCES users(id));   
 
@@ -27,25 +27,25 @@ URLs, Rotas, Parâmetros e afins...
 ### Rotas disponíveis  
 URL base: http://localhost:3000
 
-| Método    | Rota                                                          | Status             | Descrição                                                |
-|:----------|:--------------------------------------------------------------|:------------------:|:---------------------------------------------------------|
-| POST      | `/login`                                                      |:heavy_check_mark:  | Efetuar login na aplicação                               |
-| GET       | `/user/(ID)/`                                                 |:heavy_check_mark:  | Listar dados de um usuário                               |
-| POST      | `/user/cadastro`                                              |:heavy_check_mark:  | Cadastrar um novo usuário                                |
-| PUT       | `/user/(ID)/atualiza`                                         |:heavy_check_mark:  | Atualizar dados de um usuário                            |
-| DELETE    | `/user/(ID)/remove`                                           |:heavy_check_mark:  | Remover um usuário da aplicação                          |
-| GET       | `/user/(ID)/produtos`                                         |:heavy_check_mark:  | Retornar os produtos de um usuário                       |
-| GET       | `/user/(ID)/produtos/(produto)`                               |:heavy_check_mark:  | Retornar os dados de um produto                          |
-| PUT       | `/user/(ID)/produtos/(produto)/edita`                         |:heavy_check_mark:  | Editar os dados de um produto                            |
-| DELETE    | `/user/(ID)/produtos/(produto)/remove`                        |:heavy_check_mark:  | Remover um produto da aplicação                          |
-| POST      | `/user/(ID)/produtos/cadastra`                                |:heavy_check_mark:  | Cadastrar um novo produto                                |
-| GET       | `/user/(ID)/propostas/feitas`                                 |:heavy_check_mark:  | Listar propostas feitas pelo usuário                     |
-| GET       | `/user/(ID)/propostas/recebidas`                              |:heavy_check_mark:  | Listar propostas recebidas pelo usuário                  |
-| GET       | `/user/(ID)/produtos/(produto)/propostas`                     |:heavy_check_mark:  | Retornar os dados de uma proposta                        |
-| GET       | `/user/(ID)/produtos/(produto)/propostas/(proposta)`          |:heavy_check_mark:  | Retornar os dados de uma proposta                        |
-| POST      | `/user/(ID)/produtos/(produto)/propostas/(proposta)/aceitar`  |:heavy_check_mark:  | Aceitar uma proposta                                     |
-| POST      | `/user/(ID)/produtos/(produto)/propostas/(proposta)/recusar`  |:heavy_check_mark:  | Recusar uma proposta                                     |
-| POST      | `/user/(ID)/produtos/(produto)/propostas/nova/(ID2)/(oferta)` |:heavy_check_mark:  | 'ID2' oferece 'oferta' para 'ID' em troca de 'produto'   |    
+| Método    | Rota                                                          | Implementação      | Integração | Descrição                                                |
+|:----------|:--------------------------------------------------------------|:------------------:|:----------:|:---------------------------------------------------------|
+| POST      | `user/login`                                                  |:heavy_check_mark:  |:x:         | Efetuar login na aplicação                               |
+| GET       | `/user/(ID)/`                                                 |:heavy_check_mark:  |:x:         | Listar dados de um usuário                               |
+| POST      | `/user/cadastro`                                              |:heavy_check_mark:  |:x:         | Cadastrar um novo usuário                                |
+| PUT       | `/user/(ID)/atualiza`                                         |:heavy_check_mark:  |:x:         | Atualizar dados de um usuário                            |
+| DELETE    | `/user/(ID)/remove`                                           |:heavy_check_mark:  |:x:         | Remover um usuário da aplicação                          |
+| GET       | `/user/(ID)/produtos`                                         |:heavy_check_mark:  |:x:         | Retornar os produtos de um usuário                       |
+| GET       | `/user/(ID)/produtos/(produto)`                               |:heavy_check_mark:  |:x:         | Retornar os dados de um produto                          |
+| PUT       | `/user/(ID)/produtos/(produto)/edita`                         |:heavy_check_mark:  |:x:         | Editar os dados de um produto                            |
+| DELETE    | `/user/(ID)/produtos/(produto)/remove`                        |:heavy_check_mark:  |:x:         | Remover um produto da aplicação                          |
+| POST      | `/user/(ID)/produtos/cadastra`                                |:heavy_check_mark:  |:x:         | Cadastrar um novo produto                                |
+| GET       | `/user/(ID)/propostas/feitas`                                 |:heavy_check_mark:  |:x:         | Listar propostas feitas pelo usuário                     |
+| GET       | `/user/(ID)/propostas/recebidas`                              |:heavy_check_mark:  |:x:         | Listar propostas recebidas pelo usuário                  |
+| GET       | `/user/(ID)/produtos/(produto)/propostas`                     |:heavy_check_mark:  |:x:         | Retornar os dados de uma proposta                        |
+| GET       | `/user/(ID)/produtos/(produto)/propostas/(proposta)`          |:heavy_check_mark:  |:x:         | Retornar os dados de uma proposta                        |
+| POST      | `/user/(ID)/produtos/(produto)/propostas/(proposta)/aceitar`  |:heavy_check_mark:  |:x:         | Aceitar uma proposta                                     |
+| POST      | `/user/(ID)/produtos/(produto)/propostas/(proposta)/recusar`  |:heavy_check_mark:  |:x:         | Recusar uma proposta                                     |
+| POST      | `/user/(ID)/produtos/(produto)/propostas/nova/(ID2)/(oferta)` |:heavy_check_mark:  |:x:         | 'ID2' oferece 'oferta' para 'ID' em troca de 'produto'   |    
 
 
 

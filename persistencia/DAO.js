@@ -57,5 +57,5 @@ DAO.prototype.aceitar_recusar_proposta = function (proposta, callback){
 };
 
 DAO.prototype.fazer_login = function (user, callback) {
-    this._connection.query('SELECT * FROM users where email = ? and senha = ?', [user.username, user.password], callback);
-}
+    this._connection.query('SELECT id, email, usuario, nome, sobrenome FROM users where usuario = ? and senha = ?', [user.username, user.password], callback);
+};

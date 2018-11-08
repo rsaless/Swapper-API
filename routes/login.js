@@ -4,7 +4,7 @@ const verify = promisify(jwt.verify);
 module.exports = function(app){
 
     app.post('/user/login', function(req, res) {
-        req.assert("login.username", "campo \"Email\" é obrigatorio").notEmpty();
+        req.assert("login.username", "campo \"Usuário\" é obrigatorio").notEmpty();
         req.assert("login.password", "campo \"Senha\" é obrigatorio").notEmpty();
 
         var erros = req.validationErrors();

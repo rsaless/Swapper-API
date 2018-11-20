@@ -2,14 +2,22 @@ module.exports = function (app) {
 
     function nome_completo(usuario){
         return usuario.nome + " " + usuario.sobrenome;
-    };
+    }
 
     app.post('/user/cadastro', function (req, res) {
+
         req.assert("usuario.nome", "campo \"Nome\" é obrigatorio").notEmpty();
         req.assert("usuario.sobrenome", "campo \"Sobrenome\" é obrigatorio").notEmpty();
         req.assert("usuario.email", "campo \"Email\" é obrigatorio").notEmpty();
+        req.assert("usuario.usuario", "campo \"Usuário\" é obrigatorio").notEmpty();        req.assert("usuario.senha", "campo \"Senha\" é obrigatorio").notEmpty();
         req.assert("usuario.senha", "campo \"Senha\" é obrigatorio").notEmpty();
-        req.assert("usuario.celular", "campo \"Celular\" é obrigatorio").notEmpty();
+        req.assert("usuario.celular", "campo \"Celular\" é obrigatorio").notEmpty();        req.assert("usuario.senha", "campo \"Senha\" é obrigatorio").notEmpty();
+        req.assert("usuario.endereco", "campo \"Endereço\" é obrigatorio").notEmpty();
+        req.assert("usuario.numero", "campo \"Número\" é obrigatorio").notEmpty();
+        req.assert("usuario.cidade", "campo \"Cidade\" é obrigatorio").notEmpty();
+
+        req.assert("usuario.email", "Email inválido").isEmail();
+        req.assert("usuario.numero", "Número inválido").isInt();
 
         var erros = req.validationErrors();
         if (erros){

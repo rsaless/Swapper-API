@@ -5,6 +5,9 @@
     "email": "rspavarina@gmail.com",
     "usuario": "rsaless",
     "senha": "admin123456",
-    "celular": 16997561981
+    "celular": 16997561981,
+    "endereco": "Rua vergueiro",
+    "numero": 285,
+    "cidade": "Araraquara"
   }
 }

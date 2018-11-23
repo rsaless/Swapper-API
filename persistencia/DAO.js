@@ -15,8 +15,8 @@ DAO.prototype.atualiza_usuario = function(usuario, id, callback){
 DAO.prototype.remove_usuario = function(usuario, callback){
     this._connection.query('UPDATE users SET status = ? where id = ?',[usuario.status, usuario.id], callback);
 };
-DAO.prototype.busca_usuario = function(id, callback){
-    this._connection.query('SELECT * FROM users WHERE id = ?', [id], callback);
+DAO.prototype.busca_usuario = function(usuario, callback){
+    this._connection.query('SELECT * FROM users WHERE usuario = ?', [usuario], callback);
 };
 
 DAO.prototype.lista_produtos_usuario = function(user_id, callback){

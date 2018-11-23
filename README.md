@@ -67,7 +67,7 @@ URL base: http://localhost:3000
 | Método    | Rota                                                          | Implementação      | Integração | Descrição                                                |
 |:----------|:--------------------------------------------------------------|:------------------:|:----------:|:---------------------------------------------------------|
 | POST      | `user/login`                                                  |:heavy_check_mark:  |:x:         | Efetuar login na aplicação                               |
-| GET       | `/user/(ID)/`                                                 |:heavy_check_mark:  |:x:         | Listar dados de um usuário                               |
+| GET       | `/user/(username)/`                                           |:heavy_check_mark:  |:x:         | Listar dados de um usuário                               |
 | POST      | `/user/cadastro`                                              |:heavy_check_mark:  |:x:         | Cadastrar um novo usuário                                |
 | PUT       | `/user/(ID)/atualiza`                                         |:heavy_check_mark:  |:x:         | Atualizar dados de um usuário                            |
 | DELETE    | `/user/(ID)/remove`                                           |:heavy_check_mark:  |:x:         | Remover um usuário da aplicação                          |

@@ -4,6 +4,7 @@ module.exports = function (app) {
         return usuario.nome + " " + usuario.sobrenome;
     }
 
+    // Cadastra um novo usuário
     app.post('/user/cadastro', function (req, res) {
 
         req.assert("usuario.nome", "campo \"Nome\" é obrigatorio").notEmpty();
@@ -71,6 +72,8 @@ module.exports = function (app) {
             }
         });
     });
+
+    // Atualiza os dados de um usuário já cadastrado
     app.put('/user/:id/atualiza', function (req, res) {
 
         var usuario = req.body["usuario"];
@@ -117,14 +120,16 @@ module.exports = function (app) {
             }
         });
     });
-    app.get('/user/:id', function (req, res) {
-        var id = req.params.id;
-        console.log('consultando dados do usuario: ID = ' + id);
+
+    // Retorna os dados de um usuário
+    app.get('/user/:username', function (req, res) {
+        var username = req.params.username;
+        console.log('consultando dados do usuario ' + username);
 
         var connection = app.persistencia.connectionFactory();
         var dao = new app.persistencia.DAO(connection);
 
-        dao.busca_usuario(id, function (erro, resultado) {
+        dao.busca_usuario(username, function (erro, resultado) {
             if(erro){
                 console.log('erro ao consultar usuário no banco: ' + erro);
                 res.status(500).send(erro);
@@ -136,6 +141,8 @@ module.exports = function (app) {
             }
         });
     });
+
+    // Deleta um usuário
     app.delete('/user/:id/remove', function (req, res) {
         var usuario = {};
         usuario.id = req.params.id;

@@ -1,18 +1,9 @@
 module.exports = function (app) {
 
     app.post('/user/:id/produtos/cadastra', function (req, res) {
-        req.assert("produto.nome", "campo \"Nome\" é obrigatorio").notEmpty();
-        req.assert("produto.min_price", "campo \"Preço mínimo\" é obrigatorio").notEmpty();
-        req.assert("produto.max_price", "campo \"Preço máximo\" é obrigatorio").notEmpty();
-
-        var erros = req.validationErrors();
-        if (erros){
-            console.log('Erros de validação encontrados');
-            res.status(400).send(erros);
-            return;
-        }
 
         var id = req.params.id;
+        console.log(req.body);
         var produto = req.body["produto"];
         console.log("processando o cadastro de um novo produto");
         produto.status = 'DISPONIVEL';

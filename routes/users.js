@@ -23,7 +23,7 @@ module.exports = function (app) {
         var erros = req.validationErrors();
         if (erros){
             console.log('Erros de validação encontrados');
-            res.status(400).send(erros);
+            res.json(erros);
             return;
         }
 
@@ -37,7 +37,8 @@ module.exports = function (app) {
         dao.cadastra_usuario(usuario, function (erro, resultado) {
             if (erro){
                 console.log('Erro ao inserir o novo usuário no banco: ' + erro);
-                res.status(500).send(erro);
+                res.json(erro);
+                console.log(erro);
             } else {
                 usuario.id = resultado.insertId;
                 console.log('Usuário ' + nome_completo(usuario) + ' cadastrado com sucesso!');
@@ -68,7 +69,8 @@ module.exports = function (app) {
                     ]
                 };
 
-                res.status(201).json(response);
+                res.status(201).send(usuario);
+                console.log(response);
             }
         });
     });

@@ -44,8 +44,8 @@ module.exports = function(app){
 
                     return;
                 } else {
-                    console.log('Email ou senha incorretos!');
-                    res.status(400).json('Email ou senha incorretos!');
+                    console.log('Username ou senha incorretos!');
+                    res.status(500).json('Username ou senha incorretos!');
                     return;
                 }
             }

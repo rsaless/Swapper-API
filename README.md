@@ -35,9 +35,8 @@ CREATE TABLE produtos(
     id int(11) NOT NULL AUTO_INCREMENT, 
     nome varchar(80) NOT NULL, 
     quantidade int(2) NOT NULL DEFAULT '1', 
-    min_price decimal(4,2) NOT NULL DEFAULT '1.00', 
-    max_price decimal(8,2) NOT NULL, 
     descricao varchar(256) NOT NULL DEFAULT 'Não há descrição', 
+	categoria varchar(20) NOT NULL,
     status varchar(20) NOT NULL, 
     user_id int(11) NOT NULL, 
     PRIMARY KEY (id), 
@@ -66,16 +65,16 @@ URL base: http://localhost:3000
 
 | Método    | Rota                                                          | Implementação      | Integração | Descrição                                                |
 |:----------|:--------------------------------------------------------------|:------------------:|:----------:|:---------------------------------------------------------|
-| POST      | `user/login`                                                  |:heavy_check_mark:  |:x:         | Efetuar login na aplicação                               |
-| GET       | `/user/(username)/`                                           |:heavy_check_mark:  |:x:         | Listar dados de um usuário                               |
-| POST      | `/user/cadastro`                                              |:heavy_check_mark:  |:x:         | Cadastrar um novo usuário                                |
+| POST      | `user/login`                                                  |:heavy_check_mark:  |:heavy_check_mark:         | Efetuar login na aplicação                               |
+| GET       | `/user/(username)/`                                           |:heavy_check_mark:  |:heavy_check_mark:         | Listar dados de um usuário                               |
+| POST      | `/user/cadastro`                                              |:heavy_check_mark:  |:heavy_check_mark:         | Cadastrar um novo usuário                                |
 | PUT       | `/user/(ID)/atualiza`                                         |:heavy_check_mark:  |:x:         | Atualizar dados de um usuário                            |
 | DELETE    | `/user/(ID)/remove`                                           |:heavy_check_mark:  |:x:         | Remover um usuário da aplicação                          |
-| GET       | `/user/(ID)/produtos`                                         |:heavy_check_mark:  |:x:         | Retornar os produtos de um usuário                       |
+| GET       | `/user/(ID)/produtos`                                         |:heavy_check_mark:  |:heavy_check_mark:         | Retornar os produtos de um usuário                       |
 | GET       | `/user/(ID)/produtos/(produto)`                               |:heavy_check_mark:  |:x:         | Retornar os dados de um produto                          |
 | PUT       | `/user/(ID)/produtos/(produto)/edita`                         |:heavy_check_mark:  |:x:         | Editar os dados de um produto                            |
 | DELETE    | `/user/(ID)/produtos/(produto)/remove`                        |:heavy_check_mark:  |:x:         | Remover um produto da aplicação                          |
-| POST      | `/user/(ID)/produtos/cadastra`                                |:heavy_check_mark:  |:x:         | Cadastrar um novo produto                                |
+| POST      | `/user/(ID)/produtos/cadastra`                                |:heavy_check_mark:  |:heavy_check_mark:         | Cadastrar um novo produto                                |
 | GET       | `/user/(ID)/propostas/feitas`                                 |:heavy_check_mark:  |:x:         | Listar propostas feitas pelo usuário                     |
 | GET       | `/user/(ID)/propostas/recebidas`                              |:heavy_check_mark:  |:x:         | Listar propostas recebidas pelo usuário                  |
 | GET       | `/user/(ID)/produtos/(produto)/propostas`                     |:heavy_check_mark:  |:x:         | Retornar os dados de uma proposta                        |

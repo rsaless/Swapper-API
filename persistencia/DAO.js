@@ -25,6 +25,11 @@ DAO.prototype.lista_produtos_usuario = function(user_id, callback){
 DAO.prototype.busca_produto_usuario = function(user_id, id, callback){
     this._connection.query('SELECT * FROM produtos WHERE user_id = ? and id = ?', [user_id, id], callback);
 };
+
+DAO.prototype.busca_produtos_categoria = function(categoria, callback){
+    this._connection.query('SELECT * FROM produtos WHERE categoria = ?', [categoria], callback);
+};
+
 DAO.prototype.cadastra_produto = function (produto, callback) {
     this._connection.query('INSERT INTO produtos SET ?', produto, callback)
 };

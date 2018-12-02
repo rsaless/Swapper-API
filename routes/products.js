@@ -64,6 +64,29 @@ module.exports = function (app) {
             }
         })
     });
+
+    app.get('/anuncios/produtos/:categoria', function(req, res){
+        var categoria = req.params.categoria;
+        console.log('consultando produtos anunciados da cetegoria = ' + categoria);
+
+        var connection = app.persistencia.connectionFactory();
+        var dao = new app.persistencia.DAO(connection);
+
+        dao.busca_produtos_categoria(categoria, function(erro, resultado){
+            if (erro){
+                console.log('erro ao consultar anuncios no banco: ' + erro);
+                res.status(500).send(erro);
+                return;
+            } else {
+                console.log('anuncios encontrados: ' + JSON.stringify(resultado));
+                res.status(200).json(resultado);
+                return;
+            }
+        })
+    });
+
+
+
     app.get('/user/:user_id/produtos/:id', function(req, res){
         var user_id = req.params.user_id;
         var id = req.params.id;

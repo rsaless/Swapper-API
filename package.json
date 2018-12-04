@@ -1,6 +1,6 @@
 {
   "name": "swapper-api",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "API Node para o backend da aplicação Swapper",
   "main": "index.js",
   "scripts": {

@@ -20,7 +20,7 @@ DAO.prototype.busca_usuario = function(usuario, callback){
 };
 
 DAO.prototype.lista_produtos_usuario = function(user_id, callback){
-    this._connection.query('SELECT * FROM produtos WHERE user_id = ?', [user_id], callback);
+    this._connection.query('SELECT * FROM produtos WHERE user_id = ? and status = \'DISPONIVEL\'', [user_id], callback);
 };
 DAO.prototype.busca_produto_usuario = function(user_id, id, callback){
     this._connection.query('SELECT * FROM produtos WHERE user_id = ? and id = ?', [user_id, id], callback);

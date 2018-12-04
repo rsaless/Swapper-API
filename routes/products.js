@@ -58,6 +58,7 @@ module.exports = function (app) {
                 res.status(500).send(erro);
                 return;
             } else {
+                console.log(resultado);
                 console.log('produtos encontrados: ' + JSON.stringify(resultado));
                 res.status(200).json(resultado);
                 return;

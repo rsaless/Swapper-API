@@ -26,10 +26,6 @@ DAO.prototype.busca_produto_usuario = function(user_id, id, callback){
     this._connection.query('SELECT * FROM produtos WHERE user_id = ? and id = ?', [user_id, id], callback);
 };
 
-DAO.prototype.busca_produtos_categoria = function(categoria, callback){
-    this._connection.query('SELECT * FROM produtos WHERE categoria = ?', [categoria], callback);
-};
-
 DAO.prototype.cadastra_produto = function (produto, callback) {
     this._connection.query('INSERT INTO produtos SET ?', produto, callback)
 };
@@ -40,8 +36,16 @@ DAO.prototype.remove_produto = function (produto, callback) {
     this._connection.query('UPDATE produtos SET status = ? where user_id = ? and id = ?',[produto.status, produto.user_id, produto.id], callback);
 };
 
+DAO.prototype.cadastra_anuncio = function(anuncio, callback){
+    this._connection.query('INSERT INTO anuncios SET ?', anuncio,callback)
+}
+
+DAO.prototype.consulta_anuncios = function(user_id, callback){
+    this._connection.query('SELECT anuncios.id, produtos.nome, id_produto, descricao, quantidade, data FROM anuncios, users, produtos WHERE id_anunciante = ? and id_anunciante = users.id and id_produto = produtos.id', user_id, callback)
+}
+
 DAO.prototype.propostas_recebidas = function (id, callback) {
-    this._connection.query('SELECT * FROM propostas where dono_desejado = ?', [id], callback);
+    this._connection.query('select produtos.nome as nome_produto, descricao, quantidade, users.nome as nome_ofertante, users.sobrenome as sobrenome_ofertante, users.email, users.celular, users.cidade from propostas, users, produtos, anuncios where propostas.dono_ofertado = users.id and produto_ofertado = produtos.id and anuncio_id = anuncios.id and anuncios.id = ?;', [id], callback);
 };
 DAO.prototype.propostas_realizadas = function (id, callback) {
     this._connection.query('SELECT * FROM propostas where dono_ofertado = ?', [id], callback);
@@ -62,5 +66,5 @@ DAO.prototype.aceitar_recusar_proposta = function (proposta, callback){
 };
 
 DAO.prototype.fazer_login = function (user, callback) {
-    this._connection.query('SELECT id, email, usuario, nome, sobrenome FROM users where usuario = ? and senha = ?', [user.username, user.password], callback);
+    this._connection.query('SELECT id, email, usuario, nome, sobrenome, celular, endereco, cidade FROM users where usuario = ? and senha = ?', [user.username, user.password], callback);
 };

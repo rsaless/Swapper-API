@@ -1,5 +1,7 @@
 # Swapper API
-Este projeto é apenas parte de um projeto maior. Um Sistema Web desenvolvido utilizando Angular, Node JS, e MongoDB.
+Este projeto é faz parte de um projeto maior, um Sistema Web desenvolvido utilizando Angular, Node JS, e MongoDB.
+
+O repositório do projeto em questão pode ser encontrado [aqui](https://github.com/ClouudStrife/Swapper).
 
 ## A API  
 Esta é uma API Node desenvolvida para o back-end do Sistema Swapper. Possui as responsabilidades de:
@@ -8,15 +10,21 @@ Esta é uma API Node desenvolvida para o back-end do Sistema Swapper. Possui as 
 * cadastro, manipulação e remoção de produtos  
 * sistema de login  
 
-Observação: Na primeira versão da API, o banco de dados utilizado será o MySQL. Posteriormente haverá a migração para o serviço MongoDB.
+**Observação:** Na primeira versão da API, o banco de dados utilizado será o MySQL. Posteriormente haverá a migração para o serviço MongoDB.
 
 ## Usando node.js
 
+Primeiramente clone este repositório.
+
 ```
+cd Swapper-API
 node index.js
 ```
 
-## Configuração do banco de dados  
+## Configuração do banco de dados
+
+Antes, certifique-se de ter o [MySQL](https://www.mysql.com/) instalado.
+
 > mysql -u root   
 > create database swapper;  
 > use swapper;  
